@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Derschutze Watch</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background-color: black;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      overflow: hidden;
+      font-family: 'Helvetica Neue', sans-serif;
+      position: relative;
+    }
+
+    .logo {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 50px;
+      font-weight: bold;
+      letter-spacing: -2,5px;
+      z-index: 10;
+      pointer-events: none;
+      mix-blend-mode: difference; /* Optional for visual harmony */
+      
+    }
+
+    .container {
+      display: flex;
+      gap: 100px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .hand-video-link {
+      position: relative;
+      width: 675px;
+      height: auto;
+      top: -100px;
+      cursor: pointer;
+      text-decoration: none;
+    }
+
+    .hand-video-link video {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      transition: transform 0.3s ease;
+      display: block;
+    }
+
+    .hand-video-link:hover video {
+      transform: scale(1.00);
+    }
+
+    .watch-name {
+      position: absolute;
+      top: 60%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: white;
+      font-size: 30px;
+      font-weight: bold;
+      background: rgba(0, 0, 0, 0.5);
+      padding: 8px 16px;
+      border-radius: 10px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+      font-family: 'Courier New', Courier, monospace; 
+    }
+
+    .hand-video-link:hover .watch-name {
+      opacity: 1;
+    }
+  </style>
+</head>
+<body>
+  <!-- 🏷️ Centered Logo -->
+  <div class="logo">derschutze</div>
+
+  <!-- 🎥 Videos -->
+  <div class="container">
+    <a
+      href="https://derschutze.com/collections/new/products/gallery-washed-denim"
+      class="hand-video-link"
+    >
+      <video loop muted playsinline preload="metadata">
+        <source src="red5.mp4" type="video/mp4" />
+      </video>
+      <div class="watch-name">Casino Frog</div>
+    </a>
+
+    <a
+      href="https://derschutze.com/collections/new/products/gallery-washed-denim"
+      class="hand-video-link"
+    >
+      <video loop muted playsinline preload="metadata">
+        <source src="gold5.mp4" type="video/mp4" />
+      </video>
+      <div class="watch-name">Western Watch</div>
+    </a>
+  </div>
+
+  <!-- 🔁 Rewind on hover -->
+  <script>
+    const handVideoLinks = document.querySelectorAll(".hand-video-link");
+
+    handVideoLinks.forEach((link) => {
+      const video = link.querySelector("video");
+      let frameRewind;
+
+      link.addEventListener("mouseenter", () => {
+        video.play();
+      });
+
+      link.addEventListener("mouseleave", () => {
+        video.pause();
+        let currentTime = video.currentTime;
+        frameRewind = setInterval(() => {
+          currentTime -= 0.012;
+          video.currentTime = Math.max(currentTime, 0);
+
+          if (currentTime <= 0) {
+            clearInterval(frameRewind);
+            video.currentTime = 0;
+          }
+        }, 10);
+      });
+    });
+  </script>
+</body>
+</html>
