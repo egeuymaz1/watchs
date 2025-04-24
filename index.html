@@ -30,11 +30,29 @@
       color: white;
       font-size: 50px;
       font-weight: bold;
-      letter-spacing: -2,5px;
+      letter-spacing: -2.5px;
       z-index: 10;
       pointer-events: none;
-      mix-blend-mode: difference; /* Optional for visual harmony */
-      
+      mix-blend-mode: difference;
+      animation: glitch 4s infinite ease-in-out;
+    }
+
+    @keyframes glitch {
+      0%, 100% {
+        text-shadow: none;
+      }
+      5% {
+        text-shadow: 5px 0 red;
+      }
+      10% {
+        text-shadow: -5px 0 blue;
+      }
+      15% {
+        text-shadow: 5px 1px green;
+      }
+      20% {
+        text-shadow: none;
+      }
     }
 
     .container {
@@ -51,6 +69,20 @@
       top: -100px;
       cursor: pointer;
       text-decoration: none;
+      opacity: 0;
+      transform: translateY(-100px);
+      animation: slideIn 1s ease-out forwards;
+    }
+
+    .hand-video-link:nth-child(2) {
+      animation-delay: 0.25s;
+    }
+
+    @keyframes slideIn {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
 
     .hand-video-link video {
@@ -79,19 +111,18 @@
       opacity: 0;
       transition: opacity 0.3s ease;
       pointer-events: none;
-      font-family: 'Courier New', Courier, monospace; 
+      font-family: 'Courier New', Courier, monospace;
     }
 
     .hand-video-link:hover .watch-name {
       opacity: 1;
     }
+
   </style>
 </head>
 <body>
-  <!-- 🏷️ Centered Logo -->
   <div class="logo">derschutze</div>
 
-  <!-- 🎥 Videos -->
   <div class="container">
     <a
       href="https://derschutze.com/collections/new/products/gallery-washed-denim"
@@ -108,13 +139,12 @@
       class="hand-video-link"
     >
       <video loop muted playsinline preload="metadata">
-        <source src="gold5.mp4" type="video/mp4" />
+        <source src="gold6.mp4" type="video/mp4" />
       </video>
       <div class="watch-name">Western Watch</div>
     </a>
   </div>
 
-  <!-- 🔁 Rewind on hover -->
   <script>
     const handVideoLinks = document.querySelectorAll(".hand-video-link");
 
